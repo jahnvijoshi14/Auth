@@ -111,7 +111,7 @@ module.exports.register = async (req, res) => {
   let data = req.body;
   let password = hashing.encrypt(data.password);
   data.password = password;
-
+  //if the email is already in db then we cannot sign again with that id
   const anyUser = await user.find({ email: req.body.email });
   console.log(anyUser);
   if (anyUser && anyUser.length > 0) {
