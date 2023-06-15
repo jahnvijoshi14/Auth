@@ -10,9 +10,10 @@ const API = "auth/google/callback";
 passport.use(
   new googleStrategy(
     {
-      //   authorizationURL: "https://accounts.google.com/o/oauth2/auth",
-      //   tokenURL: "https://accounts.google.com/o/oauth2/token",
+      //please use your client  id
       clientID: process.env.CLIENT_ID,
+
+      //please use your client secret
       clientSecret: process.env.CLIENT_SECRET,
       //   callbackURL: "http://localhost:8000/auth/google/callback",
       callbackURL: `http://localhost:8000/${API}`,

@@ -1,6 +1,7 @@
 const user = require("../models/user");
 const hashing = require("../config/hashing");
 
+//this is the home or welcome page
 module.exports.home = (req, res) => {
   if (req.isAuthenticated()) {
     return res.redirect("/welcome");
@@ -8,6 +9,7 @@ module.exports.home = (req, res) => {
   res.render("home", { User: req.user });
 };
 
+//this is registeration page
 module.exports.signup = (req, res) => {
   if (req.isAuthenticated()) {
     return res.redirect("/welcome");
@@ -15,6 +17,7 @@ module.exports.signup = (req, res) => {
   res.render("signup", { User: req.user, message: "" });
 };
 
+//this is login page
 module.exports.loginPage = (req, res) => {
   if (req.isAuthenticated()) {
     return res.redirect("/welcome");
@@ -22,10 +25,12 @@ module.exports.loginPage = (req, res) => {
   res.render("login", { User: req.user, message: "" });
 };
 
+//this is change password page
 module.exports.changePasswordPage = (req, res) => {
   res.render("change-password", { User: req.user, error: "" });
 };
 
+//this is for logout
 module.exports.logout = (req, res) => {
   req.logout(function (err) {
     if (err) {
@@ -35,6 +40,7 @@ module.exports.logout = (req, res) => {
   });
 };
 
+//this is logic to change password
 module.exports.changePassword = async (req, res) => {
   try {
     const data = await user.find({ email: req.user.email });
@@ -100,6 +106,7 @@ module.exports.login = async (req, res) => {
   // }
 };
 
+//this will add data to db
 module.exports.register = async (req, res) => {
   let data = req.body;
   let password = hashing.encrypt(data.password);
