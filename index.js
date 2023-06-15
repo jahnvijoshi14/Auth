@@ -5,11 +5,11 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 8000;
 const expressLayouts = require("express-ejs-layouts");
-let db = "";
-if (profile.name === "dev") {
-  db = require("./config/mongoose");
-}
-const { default: mongoose } = require("mongoose");
+
+const db = require("./config/mongoose");
+
+const mongoose = require("mongoose");
+
 const User = require("./models/user");
 const session = require("express-session");
 
@@ -20,18 +20,18 @@ const MongoStore = require("connect-mongo")(session);
 
 // connect to cloud database
 
-if (profile.name === "prod") {
-  mongoose.set("strictQuery", false);
-  db = async () => {
-    try {
-      const conn = await mongoose.connect(process.env.MONGO_URI);
-      console.log(`MongoDB Connected: ${port}`);
-    } catch (error) {
-      console.log(error);
-      process.exit(1);
-    }
-  };
-}
+// if (profile.name === "prod") {
+//   mongoose.set("strictQuery", false);
+//   db = async () => {
+//     try {
+//       const conn = await mongoose.connect(process.env.MONGO_URI);
+//       console.log(`MongoDB Connected: ${port}`);
+//     } catch (error) {
+//       console.log(error);
+//       process.exit(1);
+//     }
+//   };
+// }
 
 app.use(
   session({
@@ -99,15 +99,15 @@ if (profile.name === "dev") {
 }
 
 // this is for deployment
-if (profile.name === "prod") {
-  db().then(() => {
-    app.listen(port, (err) => {
-      if (err) {
-        console.log(`Error in running the server: ${err}`);
-        return;
-      }
+// if (profile.name === "prod") {
+//   db().then(() => {
+//     app.listen(port, (err) => {
+//       if (err) {
+//         console.log(`Error in running the server: ${err}`);
+//         return;
+//       }
 
-      console.log(`Server is running on port: ${port}`);
-    });
-  });
-}
+//       console.log(`Server is running on port: ${port}`);
+//     });
+//   });
+// }

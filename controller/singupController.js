@@ -112,8 +112,15 @@ module.exports.register = async (req, res) => {
   let password = hashing.encrypt(data.password);
   data.password = password;
 
-  let createdUser = await user.create(data);
-  res.redirect("/");
+  const anyUser = await user.find({ email: req.body.email });
+  console.log(anyUser);
+  if (anyUser && anyUser.length > 0) {
+    res.render("signup", { User: req.user, message: "Email Already Exist" });
+  } else {
+    let createdUser = await user.create(data);
+
+    res.redirect("/login-page");
+  }
 };
 
 // module.exports.createSession = (req, res) => {
