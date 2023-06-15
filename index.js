@@ -1,9 +1,15 @@
+require("dotenv").config();
+const profile = require("./config/enviroment");
 const express = require("express");
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 const expressLayouts = require("express-ejs-layouts");
-const db = require("./config/mongoose");
+let db = "";
+if (profile.name === "dev") {
+  db = require("./config/mongoose");
+}
+const { default: mongoose } = require("mongoose");
 const User = require("./models/user");
 const session = require("express-session");
 
@@ -11,6 +17,21 @@ const passport = require("passport");
 const passportLocal = require("./config/passport-local-strategy");
 const passportGoogle = require("./config/passport-google-oauth");
 const MongoStore = require("connect-mongo")(session);
+
+// connect to cloud database
+
+if (profile.name === "prod") {
+  mongoose.set("strictQuery", false);
+  db = async () => {
+    try {
+      const conn = await mongoose.connect(process.env.MONGO_URI);
+      console.log(`MongoDB Connected: ${port}`);
+    } catch (error) {
+      console.log(error);
+      process.exit(1);
+    }
+  };
+}
 
 app.use(
   session({
@@ -66,10 +87,27 @@ passport.deserializeUser(async function (id, cb) {
   }
 });
 
-app.listen(port, function (err) {
-  if (err) {
-    console.log(`Error in running the server: ${err}`);
-  }
+if (profile.name === "dev") {
+  app.listen(port, (err) => {
+    if (err) {
+      console.log(`Error in running the server: ${err}`);
+      return;
+    }
 
-  console.log(`Server is running on port: ${port}`);
-});
+    console.log(`Server is running on port: ${port}`);
+  });
+}
+
+// this is for deployment
+if (profile.name === "prod") {
+  db().then(() => {
+    app.listen(port, (err) => {
+      if (err) {
+        console.log(`Error in running the server: ${err}`);
+        return;
+      }
+
+      console.log(`Server is running on port: ${port}`);
+    });
+  });
+}
