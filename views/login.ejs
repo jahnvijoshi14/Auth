@@ -1,0 +1,59 @@
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<%-include("homenavbar")%>
+<div class="container">
+  <div class="jumbotron text-center text-primary">
+    <h1><span class="fa fa-lock"></span> Social Authentication Login</h1>
+
+    <!-- login form -->
+
+    <form action="/login" method="POST">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+
+    <!-- login with goole -->
+
+    <h4 style="color: rgb(21, 21, 86)">
+      --------------------OR--------------------
+    </h4>
+    <p>Login or Register with:</p>
+    <a href="/auth/google" class="btn btn-danger"
+      ><span class="fa fa-google"></span> SignIn with Google</a
+    >
+  </div>
+</div>
+
+<script>
+  console.log(` hshhx`)
+   <%if(message){%>
+   alert("<%=message%>");
+
+   <%}%>
+</script>

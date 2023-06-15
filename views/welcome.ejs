@@ -1,0 +1,18 @@
+<%-include("homenavbar")%> <%if(User){%>
+<div class="container">
+  <div class="jumbotron text-center text-primary">
+    <h1>
+      <span class="fa fa-lock"></span>Welcome to Social Authentication App
+    </h1>
+    <p></p>
+    <!-- <span>Logout</span> -->
+    <a href="/change-password-page" class="btn btn-danger"
+      ><span class="fa fa-google"></span> Change Password</a
+    >
+    <a href="/logout" class="btn btn-danger"
+      ><span class="fa fa-google"></span> Logout</a
+    >
+  </div>
+</div>
+
+<%}%>

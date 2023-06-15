@@ -1,0 +1,72 @@
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<%-include("homenavbar")%>
+<div class="container">
+  <div class="jumbotron text-center text-primary">
+    <h1><span class="fa fa-lock"></span> Social Authentication Signup</h1>
+
+    <!-- sign up form -->
+
+    <form action="/register" method="POST">
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Name</label>
+        <input
+          type="text"
+          name="name"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Mobile Number</label>
+        <input
+          type="number"
+          name="phone"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          name="email"
+          class="form-control"
+          id="exampleInputEmail1"
+          aria-describedby="emailHelp"
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          class="form-control"
+          id="exampleInputPassword1"
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary">Sign up</button>
+    </form>
+  </div>
+</div>
+
+<script>
+
+  console.log(` hshhx`)
+  <%if(message){%>
+  alert("<%=message%>");
+
+  <%}%>
+</script>

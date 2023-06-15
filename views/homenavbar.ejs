@@ -1,0 +1,13 @@
+<div>
+  <nav class="navbar navbar-light bg-light justify-content-between">
+    <a class="navbar-brand" style="padding-left: 15px">Auth</a>
+    <form class="form-inline">
+      <%if(User){%>
+      <h5 style="padding-right: 15px">Hi <%=User.name%>!!</h5>
+
+      <% }else{%>
+      <h5 style="padding-right: 15px">Hi User !!</h5>
+      <% }%>
+    </form>
+  </nav>
+</div>
